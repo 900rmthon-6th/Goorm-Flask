@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>My Flask Web App</title>
-</head>
+<h2 id="result"></h2>
 
-<body>
-    <h1>Welcome to my Flask Web App!</h1>
-    <p>This is a basic HTML web app using Flask.</p>
-</body>
+<script>
+    // Function to fetch data from the URL and update the HTML
+    function updateResult() {
+        // Fetch the data from the URL
+        fetch('http://time2do.works/mbti/all')
+            .then(response => response.json())
+            .then(data => {
+                // Access the desired result from the data object
+                const result = data.data;
+
+                // Update the HTML with the result
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = result;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    // Trigger the updateResult function when the page loads
+    window.addEventListener('load', updateResult);
+</script>
+
 
 </html>
